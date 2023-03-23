@@ -5,15 +5,21 @@ const tableResult = document.getElementById("result");
 const buttonEntropy = document.getElementById("buttonEntropy");
 const resultEntropy = document.getElementById("resultEn");
 let submitObj = {}; //for submit button
-var entropyObj = {} //for buttonEntropy button
+let entropyObj = {} //for buttonEntropy button
 
-submit.addEventListener("click", function calculateFreq() {
+submit.addEventListener("click",function(){
+    calculateFreq();//works with to show frequency table button method
+});
+buttonEntropy.addEventListener("click", function(){
+    calculateEnt();//works with to show entropy calculator button method
+});
+
+function calculateFreq() {
     var textInputArea = textArea.value;
     for (var i = 0; i < textInputArea.length; i++) {
         var char = textInputArea[i];
         submitObj[char] = submitObj[char] + 1 || 1;
     }
-    console.log(submitObj);
     var submitObjString = JSON.stringify(submitObj);
     console.log(submitObjString);
 
@@ -52,8 +58,8 @@ submit.addEventListener("click", function calculateFreq() {
     tableResult.style.display = 'flex';
     tableResult.style.justifyContent = 'center';
     tableResult.style.alignItems = 'center';
-});
-buttonEntropy.addEventListener("click", function calculateEnt() {
+}
+function calculateEnt() {
     var textInputArea = textArea.value;
     for (let j = 0; j < textInputArea.length; j++) {
         var symbol = textInputArea[j];
@@ -70,5 +76,5 @@ buttonEntropy.addEventListener("click", function calculateEnt() {
         entropyCalc = entropyCalc - allCounts[k] / textInputArea.length * Math.log2(allCounts[k] / textInputArea.length);
     }
     console.log(entropyCalc);
-    resultEntropy.innerHTML = entropyCalc.toFixed(2);
-})
+    resultEntropy.innerHTML = entropyCalc.toFixed(2);//toFixed(2) gives us two decimal points
+}
